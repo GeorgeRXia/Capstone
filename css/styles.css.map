@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAAA,CAAE;EACD,OAAO,EAAE,MAAM",
+"mappings": "AAAA,CAAE;EACD,OAAO,EAAE,MAAM;;AAGhB,OAAQ;EAER,SAAS,EAAE,IAAI",
 "sources": ["../sass/_guessingPortion.scss"],
 "names": [],
 "file": "styles.css"

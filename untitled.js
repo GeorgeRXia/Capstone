@@ -1,25 +1,28 @@
-var guessValue = document.getElementById("guessValue");
-var submitBtn = document.getElementById("submitGuess");
-var results = document.getElementById("result");
-var gameOver = document.getElementById("game-over");
-var clue = document.getElementById("clue");
 
-var recentGuess = "";
 var guessValues = " ";
-
 var arrayRightAnswer = ["HOBBIT", "HELLO", "AMERICA"];
 var arrayClue = ["Little Guys with hairy feet", "Hi", "Land of the free"];
 var rightAnswer = "";
 var totalGuessAmount = 0;
 
-
 var randomWordIndex = parseInt(Math.round(Math.random()*2));
 rightAnswer = arrayRightAnswer[randomWordIndex];
 
+var clue = document.getElementById("clue");
 clue.innerHTML = arrayClue[randomWordIndex];
 
+var results = document.getElementsByClassName("result")[0];
+for (var i = 0; i<rightAnswer.length; i++){
+results.innerHTML += " _ ";
+
+
+}
+
+var submitBtn = document.getElementById("submitGuess");
 
 submitBtn.addEventListener("click", function(){
+	var guessValue = document.getElementById("guessValue");
+	var recentGuess = "";
 	
 	recentGuess = guessValue.value.toUpperCase();
 
@@ -36,6 +39,7 @@ submitBtn.addEventListener("click", function(){
 function checkAnswer(recentGuess){
 
 	if(guessValues.includes(recentGuess)){
+		
 	
 	} else if(rightAnswer.includes(recentGuess)){
 		guessValues += recentGuess;
@@ -76,7 +80,7 @@ function showWord(){
 
 }
 
-
+var gameOver = document.getElementsByClassName("game-over")[0];
 function isGameOver(number, hidden){
 	if(hidden === rightAnswer ){
 		gameOver.innerHTML = "You Win! Play Again?"
@@ -109,5 +113,7 @@ function restartGame(){
 	location.reload();
 
 }
+
+
 
 
