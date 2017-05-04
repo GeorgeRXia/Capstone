@@ -39,7 +39,7 @@ submitBtn.addEventListener("click", function(){
 function checkAnswer(recentGuess){
 
 	if(guessValues.includes(recentGuess)){
-		
+		alert("You picked that Letter Already");
 	
 	} else if(rightAnswer.includes(recentGuess)){
 		guessValues += recentGuess;
