@@ -1,52 +1,59 @@
-var guessValue = document.getElementById("guessValue");
-var submitBtn = document.getElementById("submitGuess");
-var results = document.getElementById("result");
-var gameOver = document.getElementById("game-over");
 
-var recentGuess = "";
 var guessValues = " ";
+var arrayRightAnswer = ["HOBBIT", "HELLO", "AMERICA"];
+var arrayClue = ["Little Guys with hairy feet", "Hi", "Land of the free"];
 var rightAnswer = "";
-var msg = "";
-
 var totalGuessAmount = 0;
 
-var playersWord = prompt("choose a word");
-	rightAnswer = playersWord.toUpperCase();
+var randomWordIndex = parseInt(Math.round(Math.random()*2));
+rightAnswer = arrayRightAnswer[randomWordIndex];
+
+var clue = document.getElementById("clue");
+clue.innerHTML = arrayClue[randomWordIndex];
+
+var results = document.getElementsByClassName("result")[0];
+for (var i = 0; i<rightAnswer.length; i++){
+results.innerHTML += " _ ";
+
+
+}
+
+var submitBtn = document.getElementById("submitGuess");
 
 submitBtn.addEventListener("click", function(){
+	var guessValue = document.getElementById("guessValue");
+	var recentGuess = "";
 	
 	recentGuess = guessValue.value.toUpperCase();
-	
-		
 
-checkAnswer(recentGuess);
+	if(recentGuess.length > 1 ){
+		alert("Only one letter, Please.");
+
+	}else{
+		checkAnswer(recentGuess);
+	}
 
 });
 
 
 function checkAnswer(recentGuess){
 
-if(guessValues.includes(recentGuess)){
+	if(guessValues.includes(recentGuess)){
+		alert("You picked that Letter Already");
 	
+	} else if(rightAnswer.includes(recentGuess)){
+		guessValues += recentGuess;
+		showWord();
 
-} else if(rightAnswer.includes(recentGuess)){
-	guessValues += recentGuess;
-	showWord();
+	}else{
+		guessValues += recentGuess;
+		totalGuessAmount++;
+		showWord();
 
-}else{
-
-guessValues += recentGuess;
-totalGuessAmount++;
-showWord();
-
-
-}
-
+	}
 }
 
 function showWord(){
-	
-	
 	var hidden = "";
 
 	for(var j = 0; j< rightAnswer.length; j++){
@@ -64,33 +71,49 @@ function showWord(){
 			
 		}
 
-	
-
-
 	}
-	msg = hidden 
+	
 
 	results.innerHTML= hidden;
 
-isGameOver(totalGuessAmount);
+	isGameOver(totalGuessAmount, hidden);
+
+}
+
+var gameOver = document.getElementsByClassName("game-over")[0];
+function isGameOver(number, hidden){
+	if(hidden === rightAnswer ){
+		gameOver.innerHTML = "You Win! Play Again?"
+		gameOverOpition();
+
+
+	} else if(number < 5){
+		var chancesLeft =  5 - number;
+
+		gameOver.innerHTML = chancesLeft;
+
+	}else{
+		gameOver.innerHTML = "Game Over. Play Again?";
+		gameOverOpition();
+
+	}
+
+}
+
+function gameOverOpition(){
+	var reset = document.createElement("button");
+	var text = document.createTextNode("Yes");
+	reset.appendChild(text);
+	gameOver.append(reset);
+	reset.addEventListener("click", restartGame);
+}
+
+function restartGame(){
+
+	location.reload();
 
 }
 
 
-function isGameOver(number){
-if(number < 5){
-
-	var chancesLeft =  5 - number;
-
-gameOver.innerHTML = chancesLeft;
-
-}else{
-
-gameOver.innerHTML = "Game Over";
-
-}
-
-
-}
 
 
