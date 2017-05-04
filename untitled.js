@@ -10,24 +10,25 @@ var guessValues = " ";
 var arrayRightAnswer = ["HOBBIT", "HELLO", "AMERICA"];
 var arrayClue = ["Little Guys with hairy feet", "Hi", "Land of the free"];
 var rightAnswer = "";
-
-var msg = "";
 var totalGuessAmount = 0;
 
-// var playersWord = prompt("choose a word");
-// 	rightAnswer = playersWord.toUpperCase();
-var randomWordIndex = parseInt(Math.round(Math.random()*3));
+
+var randomWordIndex = parseInt(Math.round(Math.random()*2));
 rightAnswer = arrayRightAnswer[randomWordIndex];
 
 clue.innerHTML = arrayClue[randomWordIndex];
 
+
 submitBtn.addEventListener("click", function(){
 	
 	recentGuess = guessValue.value.toUpperCase();
-	
-		
 
-checkAnswer(recentGuess);
+	if(recentGuess.length > 1 ){
+		alert("Only one letter, Please.");
+
+	}else{
+		checkAnswer(recentGuess);
+	}
 
 });
 
@@ -67,25 +68,45 @@ function showWord(){
 		}
 
 	}
-	msg = hidden 
+	
 
 	results.innerHTML= hidden;
 
-	isGameOver(totalGuessAmount);
+	isGameOver(totalGuessAmount, hidden);
 
 }
 
 
-function isGameOver(number){
-	if(number < 5){
+function isGameOver(number, hidden){
+	if(hidden === rightAnswer ){
+		gameOver.innerHTML = "You Win! Play Again?"
+		gameOverOpition();
+
+
+	} else if(number < 5){
 		var chancesLeft =  5 - number;
 
 		gameOver.innerHTML = chancesLeft;
 
 	}else{
-		gameOver.innerHTML = "Game Over";
+		gameOver.innerHTML = "Game Over. Play Again?";
+		gameOverOpition();
 
 	}
+
+}
+
+function gameOverOpition(){
+	var reset = document.createElement("button");
+	var text = document.createTextNode("Yes");
+	reset.appendChild(text);
+	gameOver.append(reset);
+	reset.addEventListener("click", restartGame);
+}
+
+function restartGame(){
+
+	location.reload();
 
 }
 
