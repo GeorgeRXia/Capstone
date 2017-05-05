@@ -8,7 +8,8 @@
   height: 50px;
   width: 60px;
   color: white;
-  padding: 0px; }
+  padding: 0px;
+  text-align: center; }
 
 .tileSpace {
   margin: 40px; }
