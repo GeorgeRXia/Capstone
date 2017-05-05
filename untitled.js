@@ -1,4 +1,4 @@
-var arrayRightAnswer = ["HOBBIT", "HELLO", "AMERICA"];
+var arrayRightAnswer = ["HOBBIT WITH LEGS", "HELLO", "AMERICA"];
 var arrayClue = ["Little Guys with hairy feet", "Hi", "Land of the free"];
 
 var randomWordIndex = parseInt(Math.round(Math.random()*2));
@@ -9,8 +9,21 @@ clue.innerHTML = arrayClue[randomWordIndex];
 
 var results = document.getElementsByClassName("result")[0];
 for (var i = 0; i<rightAnswer.length; i++){
-results.innerHTML += " _ ";
+	
 
+	if(rightAnswer.charAt(i) === " "){	
+		var tile = document.createElement("div");
+		tile.className = "tileSpace " + "tile"+i;
+		tile.innerHTML += " ";
+		results.appendChild(tile);
+
+	}else {
+		var tile = document.createElement("div");
+		tile.className = "tile " + "tile"+i;
+		tile.innerHTML += " _ ";
+		results.appendChild(tile);
+		
+	}
 
 }
 
@@ -21,12 +34,8 @@ submitBtn.addEventListener("click", function(){
 	
 	recentGuess = guessValue.value.toUpperCase();
 
-	if(recentGuess.length > 1 ){
-		alert("Only one letter, Please.");
-
-	}else{
 		checkAnswer(recentGuess);
-	}
+	
 
 });
 
@@ -55,8 +64,11 @@ function showWord(){
 
 	for(var j = 0; j< rightAnswer.length; j++){
 		var characters = rightAnswer.charAt(j);
+
+		if(characters === " "){
+			
 		
-		if(guessValues.includes(characters)){
+		}else if(guessValues.includes(characters)){
 			hidden += rightAnswer.charAt(j);
 
 		}else{
@@ -80,8 +92,7 @@ function isGameOver(number, hidden){
 
 
 	} else if(number < 5){
-		console.log("got here");
-		 chancesLeft =  5 - number;
+		chancesLeft =  5 - number;
 
 		gameOver.innerHTML = chancesLeft + " Chances Left";
 
@@ -119,7 +130,7 @@ var playerScore = 0;
 function spin(){
 	spinValueShow.innerHTML = " ";
 	spinValue = Math.round(Math.random()*60)*100;
-console.log(spinValue);
+
 	if(spinValue > 3000){
 		totalGuessAmount++;
 		spinValueShow.innerHTML = "You lost a Guess";

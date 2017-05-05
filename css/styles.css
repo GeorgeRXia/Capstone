@@ -1,7 +1,25 @@
-p {
-  display: inline; }
+
+*{
+
+box-sizing: border-box;
+
+}
 
 .result {
-  font-size: 30px; }
+  font-size: 40px;
+  display: flex; }
+
+.tile {
+  margin: 5px; 
+  display: inline;
+
+
+}
+.tileSpace{
+display: inline;
+
+width: 30px;
+
+}
 
 /*# sourceMappingURL=styles.css.map */
