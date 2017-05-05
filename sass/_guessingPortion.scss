@@ -4,14 +4,30 @@
 
 
 .result {
-
-font-size: 50px;
-display: flex;
+	font-size: 50px;
+	display: flex;
 
 }
 
 .tile{
+	margin: 20px;
+	border: 10px solid white;
+	height: 50px;
+	width: 60px;
+	color: white;
+	padding: 0px;
+	
+}
 
-margin: 20px;
+.tileSpace{
+	margin: 40px;
+
+}
+.score {
+	background-color: white;
+	width:45px;
+	border: 2px solid white;
+	height: 110px;
+
 
 }

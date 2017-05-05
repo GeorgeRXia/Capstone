@@ -9,8 +9,6 @@ clue.innerHTML = arrayClue[randomWordIndex];
 
 var results = document.getElementsByClassName("result")[0];
 for (var i = 0; i<rightAnswer.length; i++){
-	
-
 	if(rightAnswer.charAt(i) === " "){	
 		var tile = document.createElement("div");
 		tile.className = "tileSpace " + "tile"+i;
@@ -57,31 +55,60 @@ function checkAnswer(recentGuess){
 		showWord();
 
 	}
+	wordBank();
 }
 
 function showWord(){
-	var hidden = "";
+	
+	console.log("1");
 
 	for(var j = 0; j< rightAnswer.length; j++){
 		var characters = rightAnswer.charAt(j);
 
 		if(characters === " "){
+			var divNum = "tile"+j;
+			var fillInSpace = document.getElementsByClassName("tile" + j)[0];
+			fillInSpace.innerHTML = " ";
 			
-		
+
 		}else if(guessValues.includes(characters)){
-			hidden += rightAnswer.charAt(j);
+			var divNum = "tile"+j;
+			var fillInLetter = document.getElementsByClassName(divNum)[0];
+			fillInLetter.innerHTML = characters;
+
 
 		}else{
-			hidden += " _ ";
+			
+			var fillInMissingLetter = document.getElementsByClassName("tile" + j)[0];
+			fillInMissingLetter.innerHTML = " _ ";
+
 			
 		}
 
 	}
-	results.innerHTML= hidden;
+	var stateOfTheGame = currentStateOfWord();
+	console.log(stateOfTheGame);
 
-	isGameOver(totalGuessAmount, hidden);
+	isGameOver(totalGuessAmount, stateOfTheGame);
 
 }
+
+function currentStateOfWord(){
+	var collectingState = "";
+	for(let i = 0; i < rightAnswer.length ;i++){
+	var divNum = "tile"+i;
+
+	var currentWord = document.getElementsByClassName(divNum)[0];
+
+	collectingState += currentWord.textContent; 
+
+
+	}
+	return collectingState;
+
+}
+
+
 var chancesLeft = 0;
 var gameOver = document.getElementsByClassName("game-over")[0];
 function isGameOver(number, hidden){
@@ -133,13 +160,13 @@ function spin(){
 
 	if(spinValue > 3000){
 		totalGuessAmount++;
-		spinValueShow.innerHTML = "You lost a Guess";
+		spinValueShow.innerHTML = "You lost a guess";
 		isGameOver(totalGuessAmount);
 		
 	
 	}else{
 		scoreContainer.append(spinValueShow);
-		spinValueShow.innerHTML = "Total Score: " + playerScore + " " + "Spin Result: " + spinValue;
+		spinValueShow.innerHTML = "Total Score: " + playerScore + "<div>" + "Spin Result: " + spinValue + "</div>";
 	}	
 
 }
@@ -148,8 +175,25 @@ function correct(){
 	playerScore += spinValue
 	spinValueShow.innerHTML = "Total Score: " + playerScore + " " + "Spin Result: " + spinValue;
 }
-function loseAGuess(){
 
+function wordBank(){
+	var wordBank = document.getElementsByClassName("word-bank")[0];
+	wordBank.innerHTML = guessValues;
 
 }
+
+function Player(name){
+	this.name = name;
+	this.score;
+
+}
+
+
+
+
+
+
+
+
+
 
