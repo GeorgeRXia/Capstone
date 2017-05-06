@@ -11,7 +11,8 @@
   height: 60px;
   width: 40px;
   color: white;
-  text-align: center; }
+  text-align: center;
+  padding: 2px; }
 
 .tileSpace {
   margin: 40px; }
@@ -49,9 +50,10 @@ body {
   width: 100%; }
 
 .inner-modal {
-  margin: 0 auto;
+  margin: 100px auto;
   background-color: white;
   width: 50%;
-  height: 500px; }
+  height: 300px;
+  text-align: center; }
 
 /*# sourceMappingURL=styles.css.map */

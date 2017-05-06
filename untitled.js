@@ -1,3 +1,11 @@
+
+var p = document.getElementsByTagName("option")[0];
+
+p.addEventListener("blur", function(){
+console.log("typing");
+})
+
+
 var arrayRightAnswer = ["HOBBIT WITH LEGS", "HEY OGGIE", "USE GITHUB"];
 var arrayClue = ["Little Guys with hairy feet", "Favorite TA", "Number one lesson"];
 var randomWordIndex;
@@ -7,16 +15,13 @@ var results = document.getElementsByClassName("result")[0];
 
 startGame();
 
-var submitBtn = document.getElementById("submitGuess");
-submitBtn.addEventListener("click", function(){
-	var guessValue = document.getElementById("guessValue");
+
+document.addEventListener("keypress", function(){
 	var recentGuess = "";
-	recentGuess = guessValue.value.toUpperCase();
-	guessValue.value = "";
+	recentGuess = event.key.toUpperCase();
 
 	checkAnswer(recentGuess);
 		
-
 });
 
 var guessValues = "";
@@ -84,14 +89,11 @@ function showWord(){
 		}else{
 			
 			var fillInMissingLetter = document.getElementsByClassName("tile" + j)[0];
-			fillInMissingLetter.innerHTML = " ";
-
-			
+			fillInMissingLetter.innerHTML = " ";			
 		}
 
 	}
 	var stateOfTheGame = currentStateOfWord();
-	console.log(stateOfTheGame);
 
 	isGameOver(totalGuessAmount, stateOfTheGame);
 
@@ -143,7 +145,7 @@ function isGameOver(number, hidden){
 var gameIsOver = document.getElementsByClassName("game-over")[1];
 function gameOverOpition(){
 	restartGameModal.style.display = "block";
-	console.log(restartGameModal.style.display);
+	
 	var reset = document.createElement("button");
 	var text = document.createTextNode("Yes");
 	reset.appendChild(text);
@@ -153,8 +155,6 @@ function gameOverOpition(){
 
 function restartGame(){
 	results.innerHTML = " ";
-	
-	console.log(restartGameModal.style.display);
 	startGame();
 	checkAnswer();
 	restartGameModal.style.display = "none";
