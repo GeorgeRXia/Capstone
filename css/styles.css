@@ -41,4 +41,17 @@ body {
   justify-content: center;
   display: flex; }
 
+.outer-modal {
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%; }
+
+.inner-modal {
+  margin: 0 auto;
+  background-color: white;
+  width: 50%;
+  height: 500px; }
+
 /*# sourceMappingURL=styles.css.map */

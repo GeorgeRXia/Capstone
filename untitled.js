@@ -114,9 +114,11 @@ function currentStateOfWord(){
 
 var chancesLeft = 0;
 var gameOver = document.getElementsByClassName("game-over")[0];
+var restartGameModal = document.getElementsByClassName("outer-modal")[0];
 function isGameOver(number, hidden){
 	if(hidden === rightAnswer ){
-		gameOver.innerHTML = "You Win! Play Again?"
+		
+		gameIsOver.innerHTML = "You Win! Play Again?"
 		
 		gameOverOpition();
 
@@ -129,26 +131,33 @@ function isGameOver(number, hidden){
 	
 
 	}else{
-		gameOver.innerHTML = "Game Over. Play Again?";
+		
+		
+		gameIsOver.innerHTML = "Game Over. Play Again?";
 		
 		gameOverOpition();
 
 	}
 
 }
-
+var gameIsOver = document.getElementsByClassName("game-over")[1];
 function gameOverOpition(){
+	restartGameModal.style.display = "block";
+	console.log(restartGameModal.style.display);
 	var reset = document.createElement("button");
 	var text = document.createTextNode("Yes");
 	reset.appendChild(text);
-	gameOver.append(reset);
+	gameIsOver.append(reset);
 	reset.addEventListener("click", restartGame);
 }
 
 function restartGame(){
 	results.innerHTML = " ";
+	
+	console.log(restartGameModal.style.display);
 	startGame();
 	checkAnswer();
+	restartGameModal.style.display = "none";
 
 }
 
