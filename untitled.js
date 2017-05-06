@@ -1,7 +1,7 @@
 
 var p = document.getElementsByTagName("option")[0];
 
-p.addEventListener("blur", function(){
+p.addEventListener("change", function(){
 console.log("typing");
 })
 
@@ -16,6 +16,7 @@ var results = document.getElementsByClassName("result")[0];
 startGame();
 
 
+
 document.addEventListener("keypress", function(){
 	var recentGuess = "";
 	recentGuess = event.key.toUpperCase();
@@ -26,13 +27,13 @@ document.addEventListener("keypress", function(){
 
 var guessValues = "";
 function startGame(){	
-	randomWordIndex = parseInt(Math.round(Math.random()*2));
+	guessValues = "";
+	randomWordIndex = Math.round(Math.random()*2);
 	rightAnswer = arrayRightAnswer[randomWordIndex];
 
 	clue = document.getElementsByClassName("clue")[0];
 	clue.innerHTML = arrayClue[randomWordIndex];
 
-	guessValues = "";
 	for (var i = 0; i<rightAnswer.length; i++){
 		if(rightAnswer.charAt(i) === " "){	
 			var tile = document.createElement("div");
@@ -49,12 +50,17 @@ function startGame(){
 		}
 
 	}
+
+	
 }
+
 
 var totalGuessAmount = 0;
 function checkAnswer(recentGuess){
-	if(guessValues.includes(recentGuess)){
-		
+
+    if(guessValues.includes(recentGuess)){
+		console.log("first if")
+
 	
 	} else if(rightAnswer.includes(recentGuess)){
 		guessValues += recentGuess;
@@ -95,21 +101,12 @@ function showWord(){
 	}
 	var stateOfTheGame = currentStateOfWord();
 
-	isGameOver(totalGuessAmount, stateOfTheGame);
+	isGameOver(stateOfTheGame);
 
 }
 
 function currentStateOfWord(){
-	var collectingState = "";
-	for(let i = 0; i < rightAnswer.length ;i++){
-	var divNum = "tile"+i;
-
-	var currentWord = document.getElementsByClassName(divNum)[0];
-
-	collectingState += currentWord.textContent; 
-
-
-	}
+	var collectingState = results.textContent;
 	return collectingState;
 
 }
@@ -117,7 +114,9 @@ function currentStateOfWord(){
 var chancesLeft = 0;
 var gameOver = document.getElementsByClassName("game-over")[0];
 var restartGameModal = document.getElementsByClassName("outer-modal")[0];
-function isGameOver(number, hidden){
+var gameIsOver = document.getElementsByClassName("game-over")[1];
+function isGameOver(hidden){
+	console.log(totalGuessAmount);
 	if(hidden === rightAnswer ){
 		
 		gameIsOver.innerHTML = "You Win! Play Again?"
@@ -125,8 +124,9 @@ function isGameOver(number, hidden){
 		gameOverOpition();
 
 
-	} else if(number < 5){
-		chancesLeft =  5 - number;
+	} else if(totalGuessAmount < 5){
+		console.log("else if");
+		chancesLeft =  5 - totalGuessAmount;
 
 		gameOver.innerHTML = chancesLeft + " Chances Left";
 
@@ -142,7 +142,7 @@ function isGameOver(number, hidden){
 	}
 
 }
-var gameIsOver = document.getElementsByClassName("game-over")[1];
+
 function gameOverOpition(){
 	restartGameModal.style.display = "block";
 	
@@ -155,8 +155,11 @@ function gameOverOpition(){
 
 function restartGame(){
 	results.innerHTML = " ";
+	totalGuessAmount = 0;
+console.log(totalGuessAmount);
+console.log(guessValues);
 	startGame();
-	checkAnswer();
+	checkAnswer(" ");
 	restartGameModal.style.display = "none";
 
 }
