@@ -1,48 +1,55 @@
-var arrayRightAnswer = ["HOBBIT WITH LEGS", "HELLO", "AMERICA"];
-var arrayClue = ["Little Guys with hairy feet", "Hi", "Land of the free"];
-
-var randomWordIndex = parseInt(Math.round(Math.random()*2));
-var rightAnswer = arrayRightAnswer[randomWordIndex];
-
-var clue = document.getElementById("clue");
-clue.innerHTML = arrayClue[randomWordIndex];
-
+var arrayRightAnswer = ["HOBBIT WITH LEGS", "HEY OGGIE", "USE GITHUB"];
+var arrayClue = ["Little Guys with hairy feet", "Favorite TA", "Number one lesson"];
+var randomWordIndex;
+var rightAnswer;
+var clue;
 var results = document.getElementsByClassName("result")[0];
-for (var i = 0; i<rightAnswer.length; i++){
-	if(rightAnswer.charAt(i) === " "){	
-		var tile = document.createElement("div");
-		tile.className = "tileSpace " + "tile"+i;
-		tile.innerHTML += " ";
-		results.appendChild(tile);
 
-	}else {
-		var tile = document.createElement("div");
-		tile.className = "tile " + "tile"+i;
-		tile.innerHTML += " _ ";
-		results.appendChild(tile);
-		
-	}
-
-}
+startGame();
 
 var submitBtn = document.getElementById("submitGuess");
 submitBtn.addEventListener("click", function(){
 	var guessValue = document.getElementById("guessValue");
 	var recentGuess = "";
-	
 	recentGuess = guessValue.value.toUpperCase();
+	guessValue.value = "";
 
-		checkAnswer(recentGuess);
-	
+	checkAnswer(recentGuess);
+		
 
 });
 
-var guessValues = " ";
+var guessValues = "";
+function startGame(){	
+	randomWordIndex = parseInt(Math.round(Math.random()*2));
+	rightAnswer = arrayRightAnswer[randomWordIndex];
+
+	clue = document.getElementsByClassName("clue")[0];
+	clue.innerHTML = arrayClue[randomWordIndex];
+
+	guessValues = "";
+	for (var i = 0; i<rightAnswer.length; i++){
+		if(rightAnswer.charAt(i) === " "){	
+			var tile = document.createElement("div");
+			tile.className = "tileSpace " + "tile"+i;
+			tile.innerHTML += " ";
+			results.appendChild(tile);
+
+		}else {
+			var tile = document.createElement("div");
+			tile.className = "tile " + "tile"+i;
+			tile.innerHTML += "";
+			results.appendChild(tile);
+		
+		}
+
+	}
+}
+
 var totalGuessAmount = 0;
 function checkAnswer(recentGuess){
-
 	if(guessValues.includes(recentGuess)){
-		alert("You picked that Letter Already");
+		
 	
 	} else if(rightAnswer.includes(recentGuess)){
 		guessValues += recentGuess;
@@ -59,9 +66,6 @@ function checkAnswer(recentGuess){
 }
 
 function showWord(){
-	
-	console.log("1");
-
 	for(var j = 0; j< rightAnswer.length; j++){
 		var characters = rightAnswer.charAt(j);
 
@@ -80,7 +84,7 @@ function showWord(){
 		}else{
 			
 			var fillInMissingLetter = document.getElementsByClassName("tile" + j)[0];
-			fillInMissingLetter.innerHTML = " _ ";
+			fillInMissingLetter.innerHTML = " ";
 
 			
 		}
@@ -107,7 +111,6 @@ function currentStateOfWord(){
 	return collectingState;
 
 }
-
 
 var chancesLeft = 0;
 var gameOver = document.getElementsByClassName("game-over")[0];
@@ -143,7 +146,9 @@ function gameOverOpition(){
 }
 
 function restartGame(){
-	location.reload();
+	results.innerHTML = " ";
+	startGame();
+	checkAnswer();
 
 }
 
@@ -178,7 +183,12 @@ function correct(){
 
 function wordBank(){
 	var wordBank = document.getElementsByClassName("word-bank")[0];
-	wordBank.innerHTML = guessValues;
+	if(guessValues === "undefined"){
+		wordBank.innerHTML = " ";
+
+	}else{
+		wordBank.innerHTML = guessValues;
+	}
 
 }
 
