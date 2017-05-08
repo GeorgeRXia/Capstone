@@ -1,14 +1,4 @@
 
-// var p = document.getElementsByTagName("select")[0];
-
-// p.addEventListener("change", function(){
-// 	var player1 = prompt("Player One enter name");
-// 	var player2 = prompt("Player Two enter name");
-
-
-// 	var player1Enter = new Player(player1);
-// 	var player2Enter = new Player(player2);
-// })
 
 
 var arrayRightAnswer = ["HOBBIT WITH LEGS", "HEY OGGIE", "USE GITHUB"];
@@ -209,11 +199,6 @@ function wordBank(){
 
 }
 
-// function Player(name){
-// 	this.name = name;
-// 	this.score;
-
-// }
 
 
 
